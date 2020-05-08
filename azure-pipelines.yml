@@ -33,6 +33,12 @@ stages:
     container: golang:latest
     steps:
     - script: go version
+  - job: RunInContainer2
+    pool:
+      vmImage: 'ubuntu-16.04'
+    container: golang:latest
+    steps:
+    - script: ls    
     
   - job: Build
     displayName: Build
