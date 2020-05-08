@@ -24,8 +24,9 @@ variables:
   
 
 stages:
-- stage: Build
-  displayName: Build stage
+
+- stage: WithContainers
+  displayName: Run my containers
   jobs:
   - job: RunInContainer
     pool:
@@ -40,8 +41,14 @@ stages:
     container: golang:latest
     steps:
     - script: ls 
-    - script: touch lala.txt   
-    
+    - script: touch lala.txt 
+    - script: ls 
+
+
+- stage: Build
+  displayName: Build stage
+  jobs:
+     
   - job: Build
     displayName: Build
     pool:
