@@ -29,6 +29,7 @@ stages:
   displayName: Run my containers
   jobs:
   - job: RunGoTest
+    dependsOn: CreateDummyFile
     pool:
       vmImage: 'ubuntu-16.04'
     container: golang:latest
