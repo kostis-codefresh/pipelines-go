@@ -28,7 +28,7 @@ stages:
 - stage: WithContainers
   displayName: Run my containers
   jobs:
-  - job: RunGotTest
+  - job: RunGoTest
     pool:
       vmImage: 'ubuntu-16.04'
     container: golang:latest
