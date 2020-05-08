@@ -28,14 +28,14 @@ stages:
 - stage: WithContainers
   displayName: Run my containers
   jobs:
-  - job: RunInContainer
+  - job: RunGotTest
     pool:
       vmImage: 'ubuntu-16.04'
     container: golang:latest
     steps:
     - script: go test
     - script: ls
-  - job: RunInContainer2
+  - job: CreateDummyFile
     pool:
       vmImage: 'ubuntu-16.04'
     container: golang:latest
@@ -72,14 +72,15 @@ stages:
   displayName: Run my containers in parallel 
   dependsOn: WithContainers
   jobs:
-  - job: RunInContainer
+  - job: TestAndBuild
     pool:
       vmImage: 'ubuntu-16.04'
     container: golang:latest
     steps:
     - script: go test
     - script: ls
-  - job: RunInContainer2
+    - script: go build
+  - job: ReadFiles
     pool:
       vmImage: 'ubuntu-16.04'
     container: golang:latest
@@ -88,7 +89,9 @@ stages:
 
 - stage: Deploy
   displayName: Deploy stage
-  dependsOn: Build
+  dependsOn: 
+  - Build
+  - Parallel_containers
 
   jobs:
   - deployment: Deploy
